@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
   Braces,
-  Command,
   Music2,
   Play,
   User,
@@ -78,6 +77,7 @@ function App() {
           <a href="#media">media</a>
         </nav>
       </header>
+      <BackgroundMusic />
 
       <section className="hero" id="home">
         <div className="hero-copy">
@@ -139,6 +139,44 @@ function App() {
 
       <MediaSection />
     </main>
+  );
+}
+
+function BackgroundMusic() {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const startMusic = () => {
+      audio.volume = 0.35;
+      audio.play().catch(() => {});
+    };
+
+    startMusic();
+
+    const unlockEvents = ["pointerdown", "keydown", "touchstart"];
+    unlockEvents.forEach((eventName) => {
+      window.addEventListener(eventName, startMusic, { once: true, passive: true });
+    });
+
+    return () => {
+      unlockEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, startMusic);
+      });
+    };
+  }, []);
+
+  return (
+    <audio
+      ref={audioRef}
+      className="background-audio"
+      src="/background-music.mp3"
+      autoPlay
+      loop
+      preload="auto"
+    />
   );
 }
 
