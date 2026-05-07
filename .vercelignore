@@ -1,0 +1,4 @@
+dist/
+node_modules/
+*.png
+public/hero-video.original.mp4
