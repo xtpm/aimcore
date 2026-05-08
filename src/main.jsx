@@ -45,7 +45,7 @@ const gameSettings = [
   ["Aspect", "16:9"],
 ];
 
-const CROSSHAIR_CODE = "cyan dot";
+const CROSSHAIR_CODE = "0;P;d;1;f;0;0t;4;0l;1;0o;0;0a;1;0f;0;1b;0";
 const mediaVideos = [
   {
     id: "kPinTBnbc8A",
